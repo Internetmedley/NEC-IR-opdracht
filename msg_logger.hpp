@@ -6,7 +6,7 @@
 //het display wordt ook gecleared om de 5 seconden.
 
 namespace NEC{
-class msg_logger : public msg_listener{
+class msg_logger : public msg_listener, public rtos::task<> {
     public:
 };
 }
