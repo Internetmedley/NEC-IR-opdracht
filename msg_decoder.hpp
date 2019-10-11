@@ -1,6 +1,8 @@
 #ifndef MSG_DECODER_HPP
 #def MSG_DECODER_HPP
 
+#include "pause_listener.hpp"
+
 //this is a class that reads pauses from the pause channel
 
 namespace NEC{

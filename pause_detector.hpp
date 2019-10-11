@@ -2,7 +2,7 @@
 #def PAUSE_DETECTOR_HPP
 
 namespace NEC{
-class pause_detector, public rtos::task<> {
+class pause_detector : public rtos::task<> {
 private:
     pause_listener & listener;
     hwlib::pin_in receiver;
@@ -11,8 +11,6 @@ public:
         listener( l ),
         receiver( p )
     {}
-    
-    
 };
 }
 #endif //PAUSE_DETECTOR_HPP
