@@ -3,7 +3,7 @@
 
 //Fill array with channel data
 //Check array values and write either 0 or 1 into channel
-void message_decoder(){
+void msg_decoder::decode(){
 	static int MessageBuffer[32];
 	for( i=0; i < size_t(MessageBuffer); i++){
 		listner.Read() = MessageBuffer.at(i);
