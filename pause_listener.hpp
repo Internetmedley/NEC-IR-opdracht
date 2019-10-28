@@ -1,5 +1,5 @@
 #ifndef PAUSE_LISTENER_HPP
-#def PAUSE_LISTENER_HPP
+#define PAUSE_LISTENER_HPP
 
 #include "ir_msg.hpp"
 

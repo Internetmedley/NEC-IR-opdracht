@@ -1,5 +1,5 @@
 #ifndef IR_MSG_HPP
-#def IR_MSG_HPP
+#define IR_MSG_HPP
 
 //entity class for infra-red messages
 

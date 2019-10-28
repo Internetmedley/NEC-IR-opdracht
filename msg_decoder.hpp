@@ -1,7 +1,7 @@
 #ifndef MSG_DECODER_HPP
-#def MSG_DECODER_HPP
+#define MSG_DECODER_HPP
 
-#include "rots.hpp"
+#include "rtos.hpp"
 #include "hwlib.hpp"
 #include "pause_listener.hpp"
 

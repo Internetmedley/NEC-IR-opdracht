@@ -1,5 +1,5 @@
-#indef MSG_LOGGER_HPP
-#def MSG_LOGGER_HPP
+#ifndef MSG_LOGGER_HPP
+#define MSG_LOGGER_HPP
 
 #include "msg_listener.hpp"
 
