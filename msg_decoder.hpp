@@ -8,18 +8,32 @@
 //this is a class that reads pauses from the pause channel
 
 namespace NEC{
-class msg_decoder : public pause_listener, public rtos::task<> {
+class msg_decoder : public rtos::task<>, public pause_listener {
 private:
-	ir_msg msg;			//moet nog geinitialiseerd worden, eerst moet ir_msg constructor gemaakt worden
-    msg_listener & listener;
+	//ir_msg msg;			//moet nog geinitialiseerd worden, eerst moet ir_msg constructor gemaakt worden
+
+    void pause_detected( int & n ) override {
+        n = detector.pause_buffer.read();
+        return;
+    }
+
+    void main() override {
+        for( ;; ) {
+            int n = 0;
+            pause_detected( n );
+            hwlib::cout << n << '\n';
+        }
+    }
+
 
 public:
-    msg_decoder( msg_listener & l ):
-        listener( l )
+    msg_decoder( pause_detector & d, const char * name ):
+        task( name ),
+        pause_listener( d )
 		//msg initialisatie
     {}
 	
-	void decode();		//verander hier member var msg met static pause channel uit pause_listener superklasse
+	
 };
 }
 #endif //MSG_DECODER_HPP

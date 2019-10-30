@@ -1,15 +1,21 @@
 #ifndef PAUSE_LISTENER_HPP
 #define PAUSE_LISTENER_HPP
 
-#include "ir_msg.hpp"
+#include "pause_detector.hpp"
+
 
 namespace NEC{
-class pause_listener{
+class pause_listener {
 protected:
-	static rtos::channel<ir_msg, 4> pause_buffer;
+	pause_detector & detector;
+
+	virtual void pause_detected( int & n ) = 0;
+
 public:
-    pause_listener():
+	pause_listener( pause_detector & d ):
+		detector( d )
 	{}
+	
 };
 }
 #endif //PAUSE_LISTENER_HPP
