@@ -11,28 +11,25 @@ namespace NEC{
 class msg_decoder : public rtos::task<>, public pause_listener {
 private:
 	//ir_msg msg;			//moet nog geinitialiseerd worden, eerst moet ir_msg constructor gemaakt worden
-
-    void pause_detected( int & n ) override {
-        n = detector.pause_buffer.read();
-        return;
-    }
+    rtos::channel< int, 32 > pause_buffer;		        //schrijft pauze duraties
 
     void main() override {
         for( ;; ) {
-            int n = 0;
-            pause_detected( n );
-            hwlib::cout << n << '\n';
+            auto c = pause_buffer.read();
+            hwlib::cout << c << '\n';
         }
     }
 
-
 public:
-    msg_decoder( pause_detector & d, const char * name ):
+    msg_decoder( const char * name ):
         task( name ),
-        pause_listener( d )
-		//msg initialisatie
+            pause_buffer( this, "pause_buffer" )
+		    //msg initialisatie
     {}
-	
+
+    void pause_detected( const int & dur ) override {
+        pause_buffer.write( dur );
+    }
 	
 };
 }

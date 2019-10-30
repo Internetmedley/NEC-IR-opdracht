@@ -17,11 +17,11 @@ int main( void ){
     tsop_vdd.flush();
 
     //auto led = target::pin_out( target::pins::d4 );
-    auto pause_d = NEC::pause_detector( tsop_signal, "pause_detector" );
-    auto decoder = NEC::msg_decoder( pause_d, "message_decoder" );
-    (void) pause_d;
+    auto decoder = NEC::msg_decoder( "message_decoder" );
+    auto detector = NEC::pause_detector( tsop_signal, decoder, "pause_detector" );
     (void) decoder;
-
+    (void) detector;
+    
     rtos::run();
 
     return 0;
