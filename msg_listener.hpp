@@ -4,7 +4,10 @@
 namespace NEC{
 class msg_listener{
 public:
-    //virtual msg msg_received( ir_msg & msg ) = 0;   //return type placeholder
+    void msg_received( const uint16_t & msg );      //moet nog virtueel gemaakt worden, maar is nu om te testen
+
+    msg_listener() {}
+
 };
 }
 #endif //MSG_LISTENER_HPP
