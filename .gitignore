@@ -1,0 +1,8 @@
+#dont track the following sources 
+
+#	compiled sources	#
+
+*.o
+*.exe
+*.elf
+*.c

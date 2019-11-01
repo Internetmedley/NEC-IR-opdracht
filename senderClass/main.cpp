@@ -1,105 +1,110 @@
 #include "hwlib.hpp"
 #include "rtos.hpp"
-class Ir_sender : public rtos::task<>{
-private:
-	rtos::channel<uint16_t ,1> ir_buffer;
-	rtos::timer sendTimer;
-	void bitPrint(uint16_t a){
-		for (int16_t i = 15; i >= 0; --i){
-			hwlib::cout << ((((a >> i) & 1) == 1) ? 1 : 0);
-			if(i == 8){hwlib::cout << ' ';}
-		}
-		hwlib::cout << hwlib::endl;}
-	void driver_led(uint16_t msg, auto ir_led){
-		ir_led.write(1);
-		ir_led.flush();
-		sendTimer.set(9000 * rtos::us);
-		wait(sendTimer);
-		ir_led.write(0);
-		ir_led.flush();
-		sendTimer.set(4500 * rtos::us);
-		wait(sendTimer);
-		for(int16_t i = 0; i < 16; i++){
-			ir_led.write(1);
-			ir_led.flush();
-			sendTimer.set(560 * rtos::us);
-			wait(sendTimer);
-			ir_led.write(0);
-			ir_led.flush();
-			if(((msg >> i) & 1) == 1){ sendTimer.set(1690 * rtos::us); wait(sendTimer); }
-			else{ sendTimer.set(560 * rtos::us); wait(sendTimer);}
-		}
-		ir_led.write(1);
-		ir_led.flush();
-		sendTimer.set(560 * rtos::us);
-		wait(sendTimer);
-		ir_led.write(0);
-		ir_led.flush();
-	}
-
-
-	void main(){
-		for(;;){
-			auto ir_led = hwlib::target::d2_36kHz();
-			auto c = ir_buffer.read();
-			bitPrint(c);
-			driver_led(c,ir_led);
-		}
-	}
-
-public: 
-	Ir_sender():
-		task("sender"), ir_buffer(this,"ir buffer"), sendTimer(this,"sendTimer"){}
-
-		/* 
-			
-			write lsb to channel we choose lsb becaus Nec protocol starts with lsb as well
-		*/
-		void write_to_channel(int playerNum, int weaponPower){
-			uint16_t dataByte = 0;
-		for(;;){
-			dataByte = (dataByte | 1);
-			dataByte |= (playerNum <<1);
-			dataByte |= (weaponPower <<6);
-			dataByte |= ((weaponPower ^ playerNum) << 11);
-			ir_buffer.write(dataByte);
-			
-		}
-	}
-};
-
-class writerTest : public rtos::task<>{
-private:
-	Ir_sender & sender;
-	int player_number;
-	int weapon_power;
-public:
-	writerTest(Ir_sender & sender, const int & player_number, const int & weapon_power):
-	sender(sender), 
-	player_number(player_number),
-	weapon_power(weapon_power){}
-
-	void main(){
-		auto button = hwlib::target::pin_in(hwlib::target::pins::d8);
-		for(;;){ 
-			if(button.read()){ sender.write_to_channel(player_number, weapon_power);}
-		}
-	}
-
-
-};
-
+#include "ir_sender.hpp"
+#include "writer_test.hpp"
 
 int main(void){
 	hwlib::wait_ms(500);
 	auto ir_led = hwlib::target::d2_36kHz();
 	int player = 2;
 	int weapon = 5;
-	auto sender = Ir_sender();
+	auto sender = ir_sender();
 	auto writer = writerTest(sender,player,weapon);
 	rtos::run();
 	return 0;
 }
+
+// class Ir_sender : public rtos::task<>{
+// private:
+// 	rtos::channel<uint16_t ,1> ir_buffer;
+// 	rtos::timer sendTimer;
+// 	void bitPrint(uint16_t a){
+// 		for (int16_t i = 15; i >= 0; --i){
+// 			hwlib::cout << ((((a >> i) & 1) == 1) ? 1 : 0);
+// 			if(i == 8){hwlib::cout << ' ';}
+// 		}
+// 		hwlib::cout << hwlib::endl;}
+// 	void driver_led(uint16_t msg, auto ir_led){
+// 		ir_led.write(1);
+// 		ir_led.flush();
+// 		sendTimer.set(9000 * rtos::us);
+// 		wait(sendTimer);
+// 		ir_led.write(0);
+// 		ir_led.flush();
+// 		sendTimer.set(4500 * rtos::us);
+// 		wait(sendTimer);
+// 		for(int16_t i = 0; i < 16; i++){
+// 			ir_led.write(1);
+// 			ir_led.flush();
+// 			sendTimer.set(560 * rtos::us);
+// 			wait(sendTimer);
+// 			ir_led.write(0);
+// 			ir_led.flush();
+// 			if(((msg >> i) & 1) == 1){ sendTimer.set(1690 * rtos::us); wait(sendTimer); }
+// 			else{ sendTimer.set(560 * rtos::us); wait(sendTimer);}
+// 		}
+// 		ir_led.write(1);
+// 		ir_led.flush();
+// 		sendTimer.set(560 * rtos::us);
+// 		wait(sendTimer);
+// 		ir_led.write(0);
+// 		ir_led.flush();
+// 	}
+
+
+// 	void main(){
+// 		for(;;){
+// 			auto ir_led = hwlib::target::d2_36kHz();
+// 			auto c = ir_buffer.read();
+// 			bitPrint(c);
+// 			driver_led(c,ir_led);
+// 		}
+// 	}
+
+// public: 
+// 	Ir_sender():
+// 		task("sender"), ir_buffer(this,"ir buffer"), sendTimer(this,"sendTimer"){}
+
+// 		/* 
+			
+// 			write lsb to channel we choose lsb becaus Nec protocol starts with lsb as well
+// 		*/
+// 		void write_to_channel(int playerNum, int weaponPower){
+// 			uint16_t dataByte = 0;
+// 		for(;;){
+// 			dataByte = (dataByte | 1);
+// 			dataByte |= (playerNum <<1);
+// 			dataByte |= (weaponPower <<6);
+// 			dataByte |= ((weaponPower ^ playerNum) << 11);
+// 			ir_buffer.write(dataByte);
+			
+// 		}
+// 	}
+// };
+
+// class writerTest : public rtos::task<>{
+// private:
+// 	Ir_sender & sender;
+// 	int player_number;
+// 	int weapon_power;
+// public:
+// 	writerTest(Ir_sender & sender, const int & player_number, const int & weapon_power):
+// 	sender(sender), 
+// 	player_number(player_number),
+// 	weapon_power(weapon_power){}
+
+// 	void main(){
+// 		auto button = hwlib::target::pin_in(hwlib::target::pins::d8);
+// 		for(;;){ 
+// 			if(button.read()){ sender.write_to_channel(player_number, weapon_power);}
+// 		}
+// 	}
+
+
+// };
+
+
+
 //		
 //	}
 //public: 

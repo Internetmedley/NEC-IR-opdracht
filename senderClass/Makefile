@@ -9,10 +9,10 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES :=
+SOURCES := writer_test.cpp ir_sender.cpp
 
 # header files in this project
-HEADERS :=
+HEADERS := ir_sender.hpp writer_test.hpp
 
 # other places to look for files for this project
 SEARCH  := 
