@@ -11,10 +11,13 @@
 namespace NEC{
 class msg_decoder : public rtos::task<>, public pause_listener {
 private:
-    rtos::channel< int, 33 > pause_buffer;		        //schrijft pauze duraties (33 is 32 pauzes plus 1 voor de start pauze)
+    rtos::channel< int, 16 > pause_buffer;		        //schrijft pauze duraties (16 is 15 pauzes voor de bits plus 1 voor de start pauze)
     msg_listener & cmd_listener;
     msg_listener & hit_listener;
+    enum class states { WAITING_FOR_START_PAUSE, DECODING };
+	states state;
 
+    void send_message( uint16_t msg );                  //schrijft een message vanuit de main naar de juiste listener
 
     void main() override;
 
@@ -29,7 +32,6 @@ public:
     void pause_detected( const int & dur ) override {
         pause_buffer.write( dur );
     }
-	
 };
 }
 #endif //MSG_DECODER_HPP

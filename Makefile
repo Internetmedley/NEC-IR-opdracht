@@ -9,10 +9,14 @@
 #############################################################################
 
 # source files in this project (main.cpp is automatically assumed)
-SOURCES := pause_detector.cpp msg_decoder.cpp
+SOURCES += pause_detector.cpp
+HEADERS += pause_detector.hpp pause_listener.hpp
+ 
+SOURCES += msg_decoder.cpp
+HEADERS += msg_decoder.hpp msg_listener.hpp
 
-# header files in this project
-HEADERS := pause_detector.hpp pause_listener.hpp msg_decoder.hpp msg_listener.hpp
+# SOURCES += 
+HEADERS += msg_logger.hpp
 
 # other places to look for files for this project
 SEARCH  := 

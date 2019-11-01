@@ -2,6 +2,7 @@
 #include "pause_listener.hpp"
 #include "msg_decoder.hpp"
 #include "msg_listener.hpp"
+#include "msg_logger.hpp"
 
 namespace target = hwlib::target;
 
@@ -17,12 +18,12 @@ int main( void ){
     tsop_vdd.flush();
 
     //auto led = target::pin_out( target::pins::d4 );
-    auto register_game_param_listener   = NEC::msg_listener();                  //msg_listener non-virtual gemaakt om te testen (dit hoort lelijk)
-    auto run_game_listener              = NEC::msg_listener();
-    auto decoder                        = NEC::msg_decoder( register_game_param_listener, run_game_listener, "message_decoder" );
-    auto detector                       = NEC::pause_detector( tsop_signal, decoder, "pause_detector" );
-    (void) register_game_param_listener;
-    (void) run_game_listener;
+    auto parameter_logger       = NEC::msg_logger( "parameter_logger" );
+    auto game_logger            = NEC::msg_logger( "game_logger" );
+    auto decoder                = NEC::msg_decoder( parameter_logger, game_logger, "message_decoder" );
+    auto detector               = NEC::pause_detector( tsop_signal, decoder, "pause_detector" );
+    (void) parameter_logger;
+    (void) game_logger;
     (void) decoder;
     (void) detector;
     
