@@ -16,8 +16,10 @@ class msg_logger : public msg_listener, public rtos::task<> {
 
     void main() override {
         for( ;; ){
+            hwlib::cout << "jemoeder" << '\n';
             auto c = logger_buffer.read();
             hwlib::cout << c << '\n';
+            hwlib::cout << "jemoeder" << '\n';
         }
     }
 

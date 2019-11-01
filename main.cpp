@@ -19,11 +19,11 @@ int main( void ){
 
     //auto led = target::pin_out( target::pins::d4 );
     auto parameter_logger       = NEC::msg_logger( "parameter_logger" );
-    auto game_logger            = NEC::msg_logger( "game_logger" );
-    auto decoder                = NEC::msg_decoder( parameter_logger, game_logger, "message_decoder" );
+    //auto game_logger            = NEC::msg_logger( "game_logger" );
+    auto decoder                = NEC::msg_decoder( parameter_logger/*, game_logger*/, "message_decoder" );
     auto detector               = NEC::pause_detector( tsop_signal, decoder, "pause_detector" );
     (void) parameter_logger;
-    (void) game_logger;
+    //(void) game_logger;
     (void) decoder;
     (void) detector;
     
