@@ -12,7 +12,8 @@
 SOURCES :=
 
 # header files in this project
-HEADERS :=
+HEADERS := keypad_listener.hpp
+HEADERS := init_game.hpp
 
 # other places to look for files for this project
 SEARCH  := 
