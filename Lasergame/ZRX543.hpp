@@ -10,15 +10,20 @@ namespace NEC{
 class ZRX543: public rtos::task<>{
 private:
 	keypad_listener & keypad_listener_obj;
+	keypad_listener & keypad_listener_obj2;
 	hwlib::keypad<16> & keypadObj;
 	
 public:
-	ZRX543(const char * name, auto & keypadObj, keypad_listener & l): 
-		task(name),keypad_listener_obj(l), keypadObj(keypadObj){}
+	ZRX543(const char * name, auto & keypadObj, keypad_listener & l, keypad_listener & l2): 
+		task(name),keypad_listener_obj(l), keypad_listener_obj2(l2), keypadObj(keypadObj){}
 	
 	void main(){
 		for(;;){
-			if(keypadObj.pressed()){keypad_listener_obj.key_detected(keypadObj.getc());}
+			if(keypadObj.pressed()){
+				char key = keypadObj.getc();
+				keypad_listener_obj.key_detected(key);
+				keypad_listener_obj2.key_detected(key);
+			}
 		}
 	}
 };

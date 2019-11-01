@@ -3,9 +3,15 @@
 #include "keypad_listener.hpp"
 #include "init_game.hpp"
 #include "ZRX543.hpp"
-//#include "reg_game_para.hpp"
+#include "reg_game_para.hpp"
 
 int main(void){
+	// kill the watchdog
+	WDT->WDT_MR = WDT_MR_WDDIS;
+	
+	// wait for the PC console to start
+	hwlib::wait_ms( 200 );
+	
 	namespace target= hwlib::target;
 	auto out0 				= hwlib::target::pin_oc( hwlib::target::pins::a0 );
 	auto out1 				= hwlib::target::pin_oc( hwlib::target::pins::a1 );
@@ -19,8 +25,8 @@ int main(void){
 	auto in_port  			= hwlib::port_in_from( in0,  in1,  in2,  in3  );
 	auto matrixObj			= hwlib::matrix_of_switches( out_port, in_port );
 	auto keypadObj			= hwlib::keypad< 16 >( matrixObj, "D#0*C987B654A321" );
-	auto init_game_obj		= NEC::init_game("init_game");
-//	auto reg_game_para_obj	= NEC::reg_game_para("reg_game_para");
-	auto keypad_control 	= NEC::ZRX543("keypad", keypadObj, init_game_obj);
+	auto init_game_obj		= NEC::init_game("init_game", "game_leader_flag");
+	auto reg_game_para_obj	= NEC::reg_game_para("reg_game_para", init_game_obj);
+	auto keypad_control 	= NEC::ZRX543("keypad", keypadObj, reg_game_para_obj, init_game_obj);
 	rtos::run();
 }
