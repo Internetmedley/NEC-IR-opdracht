@@ -14,12 +14,19 @@ class msg_logger : public msg_listener, public rtos::task<> {
     private:
     rtos::channel< uint16_t, 16 > logger_buffer;
 
+    void bitPrint(uint16_t a) {
+    for (int16_t i = 15; i >= 0; --i) {
+            hwlib::cout << ((((a >> i) & 1) == 1) ? 1 : 0);
+            if(i == 8) { hwlib::cout << ' '; }
+        }
+        hwlib::cout << hwlib::endl;
+    }
+
     void main() override {
         for( ;; ){
-            hwlib::cout << "jemoeder" << '\n';
+            //hwlib::cout << "jemoeder" << '\n';
             auto c = logger_buffer.read();
-            hwlib::cout << c << '\n';
-            hwlib::cout << "jemoeder" << '\n';
+            bitPrint( c );
         }
     }
 
