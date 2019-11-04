@@ -33,7 +33,6 @@ void ir_sender::main(){
 	int msg_counter = 0;
 	enum class states {WAIT_FOR_CHANNEL, SEND_START_BIT, TURN_LED_ON, TURN_LED_OFF};
 	states state = states::WAIT_FOR_CHANNEL;
- 	bitPrint(c);
     for(;;){
 		switch(state){
 			case states::WAIT_FOR_CHANNEL:{
@@ -94,7 +93,7 @@ void ir_sender::main(){
 				}
 				break;
 			}
-
+			bitPrint(c);
 		}
 			
  	}

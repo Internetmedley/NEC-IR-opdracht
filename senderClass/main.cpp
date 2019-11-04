@@ -10,6 +10,8 @@ int main(void){
 	int weapon = 5;
 	auto sender = ir_sender();
 	auto writer = writerTest(sender,player,weapon);
+	(void)writer;
+	(void)sender;
 	rtos::run();
 	return 0;
 }

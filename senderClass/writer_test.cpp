@@ -14,9 +14,9 @@ writerTest::writerTest(ir_sender & sender, const int & player_number, const int 
 	into the channel of the ir sender class 
 */
 void writerTest::main(){
-    auto button = hwlib::target::pin_in(hwlib::target::pins::d8);
+    auto button = hwlib::target::pin_oc(hwlib::target::pins::d8);
  		for(;;){ 
- 			if(button.read()){ sender.write_to_channel(player_number, weapon_power);}
+ 			if(button.read()){ sender.write_to_channel(player_number, weapon_power);} 
 			
  		}
 }
