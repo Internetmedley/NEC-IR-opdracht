@@ -14,6 +14,6 @@ public:
     ir_sender(); 
 
     void write_to_channel(int playernum, int weapon_power);
-    int * encode_to_array(uint16_t data);
+    int * encode_to_array(int arr[], uint16_t data);
 };
 #endif

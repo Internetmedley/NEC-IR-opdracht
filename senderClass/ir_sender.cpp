@@ -45,9 +45,9 @@ void ir_sender::main(){
 
 			case states::SEND_START_BIT:{
 				state = states::TURN_LED_ON;
-				rtos::waitable_set::wait(9000);
+				hwlib::wait_us( 9000 );
 				state = states::TURN_LED_OFF;
-				rtos::waitable_set::wait(4500);
+				hwlib::wait_us(4500);
 				bit_counter++;
 				state = states::TURN_LED_OFF;
 			}
@@ -55,8 +55,8 @@ void ir_sender::main(){
 			case states::TURN_LED_ON:{
 
 				ir_led.write(1);
-				rtos::waitable_set::wait(560);
-				if(bit_counter !=0){ state = states::SEND_START_BIT;}
+				hwlib::wait_us(560);
+				if(bit_counter ==0){ state = states::SEND_START_BIT;}
 				else{ state = states::TURN_LED_OFF;}
 				break;
 			}
@@ -73,7 +73,7 @@ void ir_sender::main(){
 							if((arr[bit_counter] == 1) && (bit_counter < 16)){ 
 								ir_led.write(0); 
 								ir_led.flush(); 
-								rtos::waitable_set::wait(1960);
+								hwlib::wait_us(1960);
 								bit_counter++;
 							 	state = states::TURN_LED_ON;
 							}
@@ -81,7 +81,7 @@ void ir_sender::main(){
 							else if ((arr[bit_counter] == 0) && (bit_counter < 16)){ 
 								ir_led.write(0); 
 								ir_led.flush(); 
-								rtos::waitable_set::wait(560);
+								hwlib::wait_us(560);
 								bit_counter++;
 								state = states::TURN_LED_ON;	
 							}
