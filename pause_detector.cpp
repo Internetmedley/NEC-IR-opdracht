@@ -1,12 +1,19 @@
 #include "pause_detector.hpp"
 
+/// @file
+
+/// \brief
+/// Main loop that detects pause durations
+/// \brief
+/// This main loop member function of pause detector reads from an IR receiver (output active low) and
+/// measures the pause durations betweens received IR signals.
+/// Afterwards 
 void NEC::pause_detector::main() {
     state = states::NO_MESSAGE;
     auto sig_start = hwlib::now_us();
     auto pause_start = hwlib::now_us();
     int pause_dur = 0;
     
-
     for( ;; ) {
         receiver.refresh();
         switch( state ) {
@@ -27,8 +34,8 @@ void NEC::pause_detector::main() {
                 else{                                                           //signaal voorbij
                     pause_start = hwlib::now_us();
                     state = states::PAUSE;
-                    hwlib::wait_us( 200 );
                 }
+                hwlib::wait_us( 200 );
                 break;
             case states::PAUSE:
                 if( !receiver.read() ){                                         //pauze voorbij
@@ -37,7 +44,7 @@ void NEC::pause_detector::main() {
                     sig_start = hwlib::now_us();
                     state = states::SIGNAL;
                     hwlib::wait_us( 200 );
-                }
+                }   
                 else{
                     if( hwlib::now_us() - pause_start > 6500 ) {    //message is hoe dan ook afegelopen
                         state = states::NO_MESSAGE;

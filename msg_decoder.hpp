@@ -19,6 +19,8 @@ private:
 
     void send_message( uint16_t msg );                  //schrijft een message vanuit de main naar de juiste listener
 
+    bool is_valid( uint16_t msg );
+
     void main() override;
 
 public:

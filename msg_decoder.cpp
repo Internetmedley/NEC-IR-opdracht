@@ -9,17 +9,35 @@
 /// equals an XOR of bits 2 through 11 and if this is true it will send the message to 
 /// the correct listener.
 /// If the player number in the received message is player 0, the message is a command instead of a hit and
-/// the 
-void NEC::msg_decoder::send_message( uint16_t msg ) {
+/// the message will be sent to the object that listens to the commands.
+
+bool NEC::msg_decoder::is_valid( uint16_t msg ) {
 	if( ((msg & 0x3E) ^ (msg & 0x7C)) == (msg & 0xF8) ) {		
-		if( (msg & 0x3E) == 0 ) {                                //als speler nr een 0 is, is het een commando, anders een hit
-			cmd_listener.msg_received( msg );
-		}
-		else { 
-			hit_listener.msg_received( msg );
-		}
+		return true;
     }
+	else{
+		return false;
+	}
 }
+
+void NEC::msg_decoder::send_message( uint16_t msg ) {
+	if( (msg & 0x3E) == 0 ) {                                //als speler nr een 0 is, is het een commando, anders een hit
+		cmd_listener.msg_received( msg );
+	}
+	else {
+		cmd_listener.msg_received( msg );
+		//hit_listener.msg_received( msg );
+	}
+}
+
+/// \brief
+/// Message decoder main loop.
+/// \details
+/// This main loop is a member function of the message decoder that will read its pause duration channel to
+/// decode a message from the pause_durations. 
+/// A measured pause of 560 micro-seconds between IR signal pulses 
+/// indicates a 0-bit, and a 1690 micro-seconds pause indicates a 1-bit.
+/// A decoded message consists of 16 bits.
 
 void NEC::msg_decoder::main() {
 	state = states::WAITING_FOR_START_PAUSE;
