@@ -29,24 +29,21 @@ void ir_sender::main(){
     auto ir_led = hwlib::target::d2_36kHz();
 	auto button = hwlib::target::pin_oc(hwlib::target::pins::d8);
 	int bit_counter = 0;
-	int msg_counter = 0;
+	//int msg_counter = 0;
     int  arr[16] = {};
 	enum class states {WAIT_FOR_CHANNEL, SEND_START_BIT, TURN_LED_ON, TURN_LED_OFF};
 	states state = states::WAIT_FOR_CHANNEL;
    
 
 	for(;;){
-		
 		switch(state){
-			
 			case states::WAIT_FOR_CHANNEL:{
 				auto c = ir_buffer.read();
-				bitPrint(c);
+//				bitPrint(c);
 				encode_to_array(arr,c);
 				state = states::SEND_START_BIT;
 				break;
 			}
-
 			case states::SEND_START_BIT:{
 				ir_led.write(1);
 				ir_led.flush();
@@ -57,46 +54,31 @@ void ir_sender::main(){
 				state = states::TURN_LED_ON;
 				break;
 			}
-
 			case states::TURN_LED_ON:{
 				ir_led.write(1);
 				ir_led.flush();
 				hwlib::wait_us(560);
+				ir_led.write( 0 );
+				ir_led.flush();
 
-				if(msg_counter == 2){
-					bit_counter = 0; 
-					msg_counter = 0;
-					state 		= states::WAIT_FOR_CHANNEL; 
-					ir_led.write(0);
-					ir_led.flush();
-					break;
-				}
-				else{
-				if(bit_counter == 16){ bit_counter = 0; msg_counter++; hwlib::wait_us(900000); state = states::SEND_START_BIT;  break;}
+				if(bit_counter == 16){ bit_counter = 0; ir_led.write(0 ); ir_led.flush(); hwlib::wait_us( 9000 );  state = states::WAIT_FOR_CHANNEL;}
 				else{state = states::TURN_LED_OFF;}
 				break;
-				}
 			}
-
 			case states::TURN_LED_OFF:{
-                    if((arr[bit_counter] == 1) && (bit_counter < 16)){
-                        ir_led.write(0);
-                        ir_led.flush();
-                        hwlib::wait_us(1690);
-                        bit_counter++;
-                        state = states::TURN_LED_ON;
-                        break;
-                    }
-
-                    else if ((arr[bit_counter] == 0) && (bit_counter < 16)){
-                        ir_led.write(0);
-                        ir_led.flush();
-                        hwlib::wait_us(560);
-                        bit_counter++;
-                        state = states::TURN_LED_ON;
-                        break;
-                    }
-				break;
+                ir_led.write(0);
+                ir_led.flush();
+                if(arr[bit_counter] == 1) {
+                    hwlib::wait_us(1690);
+                }
+                else {
+                    hwlib::wait_us(560);
+                }
+                ir_led.write( 1 );
+                ir_led.flush();
+                bit_counter++;
+                state = states::TURN_LED_ON;
+                break;
 			}
 		}
 	 }
