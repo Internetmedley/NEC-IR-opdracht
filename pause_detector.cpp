@@ -14,10 +14,8 @@ void NEC::pause_detector::main() {
             case states::NO_MESSAGE:
                 if( !receiver.read() ){                                       //de IR receiver is active-low!
                     sig_start = hwlib::now_us();
-                    state = states::SIGNAL;
-                    //pause_timer.set( 400 * rtos::us );                        //minimale signaal duratie is 560, dus wacht ~500 als signaal gemeten is
-                    //wait( pause_timer );
-                    hwlib::wait_us( 100 );
+                    state = states::SIGNAL;                        //minimale signaal duratie is 560, dus wacht ~500 als signaal gemeten is
+                    hwlib::wait_us( 200 );
                 }
                 break;
             case states::SIGNAL:
