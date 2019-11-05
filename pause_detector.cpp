@@ -25,7 +25,7 @@ void NEC::pause_detector::main() {
                     if( hwlib::now_us() - sig_start > 700 ) {
                         //pause_timer.set( (hwlib::now_us() + 9000 - sig_start) * rtos::us );         //wacht 9ms als startsignaal aan is
                         //wait( pause_timer );
-                        hwlib::wait_us( 100 );
+                        //hwlib::wait_us( 100 );
                     }
                 }
                 else{                                                           //signaal voorbij
@@ -53,7 +53,7 @@ void NEC::pause_detector::main() {
                     if( hwlib::now_us() - pause_start > 2000 ) {    //pauze langer dan 1690 seconden indiceert startpauze van 4.5ms of einde van message
                         //pause_timer.set( (hwlib::now_us() + 4500 - pause_start) * rtos::us );  //pauze langer dan 1690 seconden indiceert startpauze van 4.5ms of einde van message
                         //wait( pause_timer );
-                        hwlib::wait_us( 100 );
+                        //hwlib::wait_us( 100 );
                     }
                 }
                 break;           
