@@ -4,6 +4,7 @@
 #include "init_game.hpp"
 #include "ZRX543.hpp"
 #include "reg_game_para.hpp"
+#include "run_game.hpp"
 
 int main(void){
 	// kill the watchdog
@@ -25,8 +26,9 @@ int main(void){
 	auto in_port  			= hwlib::port_in_from( in0,  in1,  in2,  in3  );
 	auto matrixObj			= hwlib::matrix_of_switches( out_port, in_port );
 	auto keypadObj			= hwlib::keypad< 16 >( matrixObj, "D#0*C987B654A321" );
-	auto init_game_obj		= NEC::init_game("init_game", "game_leader_flag");
-	auto reg_game_para_obj	= NEC::reg_game_para("reg_game_para", init_game_obj);
-	auto keypad_control 	= NEC::ZRX543("keypad", keypadObj, reg_game_para_obj, init_game_obj);
+	auto init_game_obj		= NEC::init_game("init_game", "key_buffer", "game_leader_flag");
+	auto run_game_obj		= NEC::run_game("run_game", "key_buffer", "int_buffer", "start_game_flag", 1000 * rtos::ms, "game_clock");
+	auto reg_game_para_obj	= NEC::reg_game_para("reg_game_para", "key_buffer", init_game_obj, run_game_obj);
+	auto keypad_control 	= NEC::ZRX543("keypad", keypadObj, reg_game_para_obj, init_game_obj, run_game_obj);
 	rtos::run();
 }

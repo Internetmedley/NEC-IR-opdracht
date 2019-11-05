@@ -1,8 +1,6 @@
 #ifndef INIT_GAME_HPP
 #define INIT_GAME_HPP
 
-#include <string>
-
 namespace NEC{
 class init_game : public rtos::task<>, public keypad_listener {
 private:
@@ -50,7 +48,6 @@ private:
 					if(key == '#'){
 						//Todo ir_send_channel.add(message);
 						state = states::WAIT_KEY_START_GAME;
-						hwlib::cout << game_time << hwlib::endl;
 					}}
 					break;
 				case states::WAIT_KEY_START_GAME:
@@ -59,7 +56,6 @@ private:
 					key = init_game_buffer.read();
 					if(key == '*'){
 						//Todo ir_send_channel.add(message);
-						hwlib::cout << "start game " << (game_time * 5) << hwlib::endl;
 						state = states::WAIT_START_FLAG;
 					}}
 					break;
@@ -67,8 +63,11 @@ private:
 		}
 	}
 public: 
-	init_game(const char * name , const char * flag): 
-		task(name), init_game_buffer(this,"key buffer"), game_leader_flag(this, flag){}
+	init_game(const char * name, const char * buffer, const char * flag): 
+		task(name),
+		init_game_buffer(this, buffer),
+		game_leader_flag(this, flag)
+	{}
 		
 	void set_flag(){game_leader_flag.set();}
 
