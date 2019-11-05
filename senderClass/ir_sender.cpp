@@ -27,37 +27,55 @@ void ir_sender::bitPrint(uint16_t a){
 */
 void ir_sender::main(){
     auto ir_led = hwlib::target::d2_36kHz();
-	auto c = ir_buffer.read();
+	auto button = hwlib::target::pin_oc(hwlib::target::pins::d8);
 	int arr[16] = {};
 	int bit_counter = 0;
 	int msg_counter = 0;
 	enum class states {WAIT_FOR_CHANNEL, SEND_START_BIT, TURN_LED_ON, TURN_LED_OFF};
 	states state = states::WAIT_FOR_CHANNEL;
-    for(;;){
+   
+
+	for(;;){
+		
 		switch(state){
+			
 			case states::WAIT_FOR_CHANNEL:{
 				auto c = ir_buffer.read();
+				//bitPrint(c);
 				encode_to_array(arr,c);
 				state = states::SEND_START_BIT;
 				break;
 			}
 
 			case states::SEND_START_BIT:{
-				state = states::TURN_LED_ON;
+				ir_led.write(1);
+				ir_led.flush();
 				hwlib::wait_us( 9000 );
-				state = states::TURN_LED_OFF;
+				ir_led.write(0);
+				ir_led.flush();
 				hwlib::wait_us(4500);
 				bit_counter++;
-				state = states::TURN_LED_OFF;
+				state = states::TURN_LED_ON;
+				break;
 			}
 
 			case states::TURN_LED_ON:{
-
 				ir_led.write(1);
+				ir_led.flush();
 				hwlib::wait_us(560);
-				if(bit_counter ==0){ state = states::SEND_START_BIT;}
+
+				if(msg_counter == 2){ 
+					bit_counter = 0; 
+					msg_counter = 0;
+					state 		= states::WAIT_FOR_CHANNEL; 
+					ir_led.write(0);
+					ir_led.flush();
+				}
+				else{
+				if(bit_counter ==16){ bit_counter = 0; msg_counter++; state = states::SEND_START_BIT;}
 				else{ state = states::TURN_LED_OFF;}
 				break;
+				}
 			}
 
 			case states::TURN_LED_OFF:{
@@ -69,34 +87,30 @@ void ir_sender::main(){
 				else{
 					if(bit_counter == 0){ ir_led.write(0); ir_led.flush();}
 					else{
-							if((arr[bit_counter] == 1) && (bit_counter < 16)){ 
-								ir_led.write(0); 
-								ir_led.flush(); 
-								hwlib::wait_us(1960);
-								bit_counter++;
-							 	state = states::TURN_LED_ON;
-							}
-
-							else if ((arr[bit_counter] == 0) && (bit_counter < 16)){ 
-								ir_led.write(0); 
-								ir_led.flush(); 
-								hwlib::wait_us(560);
-								bit_counter++;
-								state = states::TURN_LED_ON;	
-							}
-							else{
-								if(msg_counter < 2) { msg_counter++; state = states::SEND_START_BIT;}
-							}
+						if((arr[bit_counter] == 1) && (bit_counter < 16)){ 
+							ir_led.write(0); 
+							ir_led.flush(); 
+							hwlib::wait_us(1690);
+							bit_counter++;             
+							state = states::TURN_LED_ON;
 						}
-						
+
+						else if ((arr[bit_counter] == 0) && (bit_counter < 16)){ 
+							ir_led.write(0); 
+							ir_led.flush(); 
+							hwlib::wait_us(560);
+							bit_counter++;
+							state = states::TURN_LED_ON;	
+						}
 					}
 				}
 				break;
 			}
-			bitPrint(c);
 		}
-			
- 	}
+	 }
+  }
+
+
 
 /*
 	This function allows writing into the channel of the class ir sender
