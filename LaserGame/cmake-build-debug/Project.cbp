@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Project"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\lib\;CMake Files\..\..\lib\HCT\;CMake Files\..\..\lib\HCT\Target_Maker\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LaserGame">
+				<Option output="/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/CMakeFiles/LaserGame.dir/LaserGame.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets/cortex/atmel"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets/cortex/atmel/sam3xa/include"/>
+					<Add directory="/mnt/c/Users/dylan/lib/RTOS"/>
+					<Add directory="/mnt/c/Users/dylan/lib/HWLIB/library"/>
+					<Add directory="/mnt/c/Users/dylan/Catch2/single_include"/>
+					<Add directory="/mnt/c/Users/dylan/Catch2/single_include/catch2"/>
+					<Add directory="/mnt/c/Users/dylan/boost_1_69_0"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets/cortex"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets/cortex/cmsis"/>
+					<Add directory="/mnt/c/Users/dylan/CLionProjects/LaserGame"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/Makefile&quot;  VERBOSE=1 LaserGame"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="LaserGame/fast">
+				<Option output="/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/CMakeFiles/LaserGame.dir/LaserGame.objlib" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets/cortex/atmel"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets/cortex/atmel/sam3xa/include"/>
+					<Add directory="/mnt/c/Users/dylan/lib/RTOS"/>
+					<Add directory="/mnt/c/Users/dylan/lib/HWLIB/library"/>
+					<Add directory="/mnt/c/Users/dylan/Catch2/single_include"/>
+					<Add directory="/mnt/c/Users/dylan/Catch2/single_include/catch2"/>
+					<Add directory="/mnt/c/Users/dylan/boost_1_69_0"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets/cortex"/>
+					<Add directory="/mnt/c/Users/dylan/lib/BMPTK/targets/cortex/cmsis"/>
+					<Add directory="/mnt/c/Users/dylan/CLionProjects/LaserGame"/>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/Makefile&quot;  VERBOSE=1 LaserGame/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/test.txt">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/CLionProjects/LaserGame/cmake-build-debug/HCT/LaserGame/test.txt.rule">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/CLionProjects/LaserGame/main.cpp">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/lib/BMPTK/targets/cortex/bmptk_cortex.c">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/lib/HWLIB/library/hwlib.cpp">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/lib/HWLIB/library/hwlib.hpp">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/lib/RTOS/coroutine.cpp">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/lib/RTOS/coroutine.hpp">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/lib/RTOS/rtos.cpp">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/lib/RTOS/rtos.hpp">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/lib/RTOS/switch_to.asm">
+			<Option target="LaserGame"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/CLionProjects/LaserGame/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/CLionProjects/LaserGame/../../lib/HCT/HCT.cmake">
+			<Option virtualFolder="CMake Files\..\..\lib\HCT\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/dylan/CLionProjects/LaserGame/../../lib/HCT/Target_Maker/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\..\..\lib\HCT\Target_Maker\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
