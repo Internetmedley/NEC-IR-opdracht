@@ -1,14 +1,20 @@
 #include "ir_sender.hpp"
+/// @file
+
+/// \brief
+/// Constructor for ir_sender: inits a rtos task with name sender
+/// and makes both a ir_buffer (rtos channel) and sendTimer(rtos::timer)
 
 ir_sender::ir_sender():task("sender"), ir_buffer(this,"ir buffer"), sendTimer(this,"sendTimer"){}
 
+/// \brief
+///// function that prints a byte
+///// \detail
+///// If this fucntion is given a uint16 value it will loop trought it
+///// shifting the byte and doing a and operation to get the value
+///// of individual bits these are than printed to the terminal
+///// the bits are printed from LSB to MSB
 
-/*
-	function that outputs a giving byte witch 
-	needs to contain 16 bits. If this is given
-	all the bits will be printed from LSB to MSB
-
-*/
 void ir_sender::bitPrint(uint16_t a){
     for (int16_t i = 15; i >= 0; --i){
 			hwlib::cout << ((((a >> i) & 1) == 1) ? 1 : 0);
@@ -17,14 +23,15 @@ void ir_sender::bitPrint(uint16_t a){
  	hwlib::cout << hwlib::endl;
 }
 
-/*
-	The main function of class ir_sender this function will
-	proces the states:
-	Wait_for_channel: waits on the channel (for now reads own channel and than calls encode_to_array() )
-	Send_start_bit: writes the led high for 9000 ms before writing it low for 4500 ms
-	turn_led_on: wirtes the led high
-	turn_led_off: writes the led low for a given time depeingin on the value in "arr" this can either be 1960 ms for a one or 560 ms for a zero
-*/
+/// \brief
+/// the main function of the task sender
+/// \detail
+/// has a amount of states with the following names and fucntion:
+/// Wait_for_channel: waits on the channel (for now reads own channel and than calls encode_to_array() )
+///	Send_start_bit: writes the led high for 9000 ms before writing it low for 4500 ms
+///	turn_led_on: wirtes the led high
+///	turn_led_off: writes the led low for a given time depeingin on the value in "arr" this can either be 1960 ms for a one or 560 ms for a zero
+
 void ir_sender::main(){
     auto ir_led = hwlib::target::d2_36kHz();
 	auto button = hwlib::target::pin_oc(hwlib::target::pins::d8);
@@ -85,17 +92,17 @@ void ir_sender::main(){
   }
 
 
+/// \brief
+/// Fucntion that allows writing into the channel of the class "ir_sender"
+/// \detail
+///	when the player number and weapon power are given. After this bitwise conversions
+///	take place to set all bytes of the message from LSB to MSB in order of:
+///	bit 0 start bit
+///	bits 1-5 player nummber (max 31)
+///	bits 6-10 weapon power/command (max 31)
+///	bits 11-15 checksum xor of bit 1&6,2&7,3&8,4&9,5&10
+///	after this it is written to the channel of ir sender
 
-/*
-	This function allows writing into the channel of the class ir sender
-	when the player number and weapon power are given. After this bitwise conversions
-	take place to set all bytes of the message from LSB to MSB in order of:
-	bit 0 start bit
-	bits 1-5 player nummber (max 31)
-	bits 6-10 weapon power/command (max 31)
-	bits 11-15 checksum xor of bit 1&6,2&7,3&8,4&9,5&10
-	after this it is written to the channel of ir sender
-*/
 void ir_sender::write_to_channel(int player_num, int weapon_power){
     uint16_t dataByte = 0;
  	dataByte = (dataByte | 1);
@@ -106,13 +113,15 @@ void ir_sender::write_to_channel(int player_num, int weapon_power){
 	
 }
 
-/*
-	This function encodes all the bits in a uint16 data type
-	to be translated to an array. This is done by shifting
-	the uint16_t with a i that decrements form fifhteen to zero
-	while ANDing with 1 thus getting its values wich is passed
-	to the array "arr"
-*/
+/// \brief
+/// This function encodes uint16 to array
+/// \detail
+/// This function encodes all the bits in a uint16 data type
+///	to be translated to an array. This is done by shifting
+///	the uint16_t with a i that decrements form fifhteen to zero
+///	while ANDing with 1 thus getting its values wich is passed
+///	to the array "arr"
+
 int * ir_sender::encode_to_array(int arr[16],uint16_t data){
 	 for (int16_t i = 15; i >= 0; --i){
 			arr[i] = ((data >> i) & 1);
