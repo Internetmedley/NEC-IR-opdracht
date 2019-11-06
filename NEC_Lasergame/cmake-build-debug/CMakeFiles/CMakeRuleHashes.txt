@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+fd00f1b3023ba0d984b9d4e3e0d482e9 HCT/NEC_Lasergame/test.txt
