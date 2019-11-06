@@ -15,7 +15,7 @@ private:
 	hwlib::keypad<16> & keypadObj;
 	
 public:
-	ZRX543(const char * name, auto & keypadObj,
+	ZRX543(const char * name, hwlib::keypad<16> & keypadObj,
 			keypad_listener & l, keypad_listener & l2, keypad_listener & l3): 
 		task(name),
 		keypad_listener_obj(l),

@@ -5,6 +5,9 @@ SEARCH :=
 HEADERS := $(wildcard *.hpp)
 
 SOURCES := ir_sender.cpp
+SOURCES += msg_decoder.cpp
+SOURCES += msg_logger.cpp
+SOURCES += pause_detector.cpp
 
 TARGET := arduino_due
 
