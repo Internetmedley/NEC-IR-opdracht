@@ -9,7 +9,7 @@
 #include "pause_detector.hpp"
 #include "pause_listener.hpp"
 #include "msg_decoder.hpp"
-#include "msg_listener.hpp"
+//#include "msg_listener.hpp"
 #include "msg_logger.hpp"
 
 int main(void){
@@ -44,11 +44,11 @@ int main(void){
 
     auto sender             = ir_sender();
 	auto init_game_obj		= NEC::init_game("init_game", "key_buffer", "game_leader_flag", sender);
-	auto run_game_obj		= NEC::run_game("run_game", "key_buffer", "int_buffer", "start_game_flag", 1000 * rtos::ms, "game_clock");
+	auto run_game_obj		= NEC::run_game("run_game", 1000 * rtos::ms);
 	auto reg_game_para_obj	= NEC::reg_game_para("reg_game_para", "key_buffer", "hits_buffer", "CMD_buffer", init_game_obj, run_game_obj);
 	auto keypad_control 	= NEC::ZRX543("keypad", keypadObj, reg_game_para_obj, init_game_obj, run_game_obj);
-    auto parameter_logger   = NEC::msg_logger( "parameter_logger" );
-    auto decoder            = NEC::msg_decoder( parameter_logger/*, game_logger*/, "message_decoder" );
+    //auto parameter_logger   = NEC::msg_logger( "parameter_logger" );
+    auto decoder            = NEC::msg_decoder( reg_game_para_obj, run_game_obj, "message_decoder" );
     auto detector           = NEC::pause_detector( tsop_signal, decoder, "pause_detector" );
 
     (void) sender;
@@ -56,7 +56,7 @@ int main(void){
     (void) run_game_obj;
     (void) reg_game_para_obj;
     (void) keypad_control;
-    (void) parameter_logger;
+    //(void) parameter_logger;
     (void) decoder;
     (void) detector;
 

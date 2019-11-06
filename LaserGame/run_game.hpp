@@ -1,12 +1,14 @@
 #ifndef RUN_GAME_HPP
 #define RUN_GAME_HPP
 
+#include "msg_listener.hpp"
 
 namespace NEC{
-class run_game : public rtos::task<>, public keypad_listener {
+class run_game : public rtos::task<>, public keypad_listener, public msg_listener {
 private:
 	rtos::channel<char, 13> run_game_buffer_char;
 	rtos::channel<int, 13> run_game_buffer_int;
+	rtos::channel<uint16_t, 16> hit_buffer;
 	rtos::flag start_game_flag;
 	rtos::clock game_clock;
 
@@ -60,13 +62,14 @@ private:
 		}
 	}
 public:
-	run_game(const char * name, const char * buffer1, const char * buffer2,
-			 const char * flag, long long int delay, const char * clock):
+	run_game( const char * name, long long int delay ):
 		task(name),
-		run_game_buffer_char(this,buffer1),
-		run_game_buffer_int(this,buffer2),
-		start_game_flag(this, flag),
-		game_clock( this, delay, clock )
+		run_game_buffer_char( this, "buffer_char" ),
+		run_game_buffer_int(this, "buffer_int" ),
+		cmd_buffer( this, "cmd_buffer" ),
+		hit_buffer( this, "hit_buffer" ),
+		start_game_flag(this, "start_game_flag"),
+		game_clock( this, delay, "game_clock" )
 	{}
 
 	void set_flag(){start_game_flag.set();}
@@ -77,6 +80,14 @@ public:
 
 	void write_int_to_channel( const int & i ){
 		run_game_buffer_int.write( i );
+	}
+
+	void cmd_received( const uint8_t & msg ) override {
+		cmd_buffer.write( msg );
+	}
+
+	void hit_received( const uint8_t & msg ) override {
+		hit_buffer.write( msg );
 	}
 };
 }

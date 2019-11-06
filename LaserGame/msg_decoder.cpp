@@ -12,7 +12,7 @@
 /// the message will be sent to the object that listens to the commands.
 
 bool NEC::msg_decoder::is_valid( uint16_t msg ) {
-	if( ((msg & 0x3E) ^ (msg & 0x7C)) == (msg & 0xF8) ) {		
+	if( ((msg & 0x3E) ^ (msg & 0x7C0)) == (msg & 0xF800) ) { 		//0x3E is player section, 0x7C0 is data section, 0xF800 is checksum section	
 		return true;
     }
 	else{
@@ -21,12 +21,11 @@ bool NEC::msg_decoder::is_valid( uint16_t msg ) {
 }
 
 void NEC::msg_decoder::send_message( uint16_t msg ) {
-	if( (msg & 0x3E) == 0 ) {                                //als speler nr een 0 is, is het een commando, anders een hit
-		cmd_listener.msg_received( msg );
+	if( (msg & 0x3E) == 0 ) {                               //als speler nr een 0 is, is het een commando, anders een hit
+		cmd_l.cmd_received( (msg & 0X7C0) >> 6 );			//stuurt alleen data section
 	}
 	else {
-		cmd_listener.msg_received( msg );
-		//hit_listener.msg_received( msg );
+		hit_l.hit_received( (msg & 0X7C3E) >> 1 );			//dit stuurt alleen data en speler nummer
 	}
 }
 

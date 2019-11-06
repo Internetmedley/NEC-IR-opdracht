@@ -10,7 +10,6 @@
 /// Afterwards 
 void NEC::pause_detector::main() {
     state = states::NO_MESSAGE;
-    auto sig_start = hwlib::now_us();
     auto pause_start = hwlib::now_us();
     int pause_dur = 0;
     
@@ -20,18 +19,12 @@ void NEC::pause_detector::main() {
             
             case states::NO_MESSAGE:
                 if( !receiver.read() ){                                       //de IR receiver is active-low!
-                    sig_start = hwlib::now_us();
                     state = states::SIGNAL;                        //minimale signaal duratie is 560, dus wacht ~500 als signaal gemeten is
-                    hwlib::wait_us( 200 );
                 }
+                hwlib::wait_us( 200 );
                 break;
             case states::SIGNAL:
-                if( !receiver.read() ){
-                    if( hwlib::now_us() - sig_start > 760 ) {
-                        hwlib::wait_us( 200 );
-                    }
-                }
-                else{                                                           //signaal voorbij
+                if( receiver.read() ){                                               //signaal voorbij
                     pause_start = hwlib::now_us();
                     state = states::PAUSE;
                 }
@@ -41,20 +34,15 @@ void NEC::pause_detector::main() {
                 if( !receiver.read() ){                                         //pauze voorbij
                     pause_dur = hwlib::now_us() - pause_start;         
                     listener.pause_detected( pause_dur );           //deze virtuele functie wordt overridden in decoder en schrijft duratie naar de channel in de listener
-                    sig_start = hwlib::now_us();
                     state = states::SIGNAL;
-                    hwlib::wait_us( 200 );
                 }   
                 else{
                     if( hwlib::now_us() - pause_start > 6500 ) {    //message is hoe dan ook afegelopen
                         state = states::NO_MESSAGE;
-                    }
-                    else if( hwlib::now_us() - pause_start > 1860 ) {    //pauze langer dan 1690 seconden indiceert startpauze van 4.5ms of einde van message
-                        //pause_timer.set( (hwlib::now_us() + 4500 - pause_start) * rtos::us );  //pauze langer dan 1690 seconden indiceert startpauze van 4.5ms of einde van message
-                        //wait( pause_timer );
-                        hwlib::wait_us( 200 );
-                    }
+                        break;
+                    }       
                 }
+                hwlib::wait_us( 200 );
                 break;           
         }
     }
