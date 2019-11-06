@@ -1,6 +1,7 @@
-#include "hwlib.hpp"
-#include "rtos.hpp"
+#ifndef DISPLAY_HPP
+#define DISPLAY_HPP
 
+namespace NEC{
 class Display : public rtos::task<>{
 private:
     hwlib::glcd_oled & oled;
@@ -104,5 +105,8 @@ int main(){
    display.write_int_to_channel(3);
    display.write_int_to_channel(4);
    rtos::run();
+};
 }
+
+#endif
 
