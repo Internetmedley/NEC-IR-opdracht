@@ -81,11 +81,7 @@ public:
 	void write_int_to_channel( const int & i ){
 		run_game_buffer_int.write( i );
 	}
-
-	void cmd_received( const uint8_t & msg ) override {
-		cmd_buffer.write( msg );
-	}
-
+	
 	void hit_received( const uint8_t & msg ) override {
 		hit_buffer.write( msg );
 	}

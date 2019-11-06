@@ -3,16 +3,14 @@
 /// @file
 
 /// \brief
-///	Checks the decoded message by our protocol.
+///	Checks if a message is a valid one
 /// \details
-///	This member function takes a decoded message and checks whether the last 5 bits
-/// equals an XOR of bits 2 through 11 and if this is true it will send the message to
-/// the correct listener.
-/// If the player number in the received message is player 0, the message is a command instead of a hit and
-/// the message will be sent to the object that listens to the commands.
+///	This member function takes a decoded message and checks the chceksum from our protocol.
+/// Our protocol for valid messages is to always have the last 5 bits of a message be the result of XOR-ing bits 2 through 6 with
+/// bits 7 through 11 of the message. Returns true if the message is a valid message.
 
 bool NEC::msg_decoder::is_valid( uint16_t msg ) {
-    if( ((msg & 0x3E) ^ (msg & 0x7C0)) == (msg & 0xF800) ) { 		//0x3E is player section, 0x7C0 is data section, 0xF800 is checksum section
+    if( ((msg & 0x3E) ^ (msg & 0x7C0) >> 5) == (msg & 0xF800) >> 10) { 		//0x3E is player section, 0x7C0 is data section, 0xF800 is checksum section
         return true;
     }
     else{
@@ -20,12 +18,20 @@ bool NEC::msg_decoder::is_valid( uint16_t msg ) {
     }
 }
 
+/// \brief
+/// Sends a command or hit message to a listener
+/// \details
+/// This member function takes a decoded message and looks which listener it needs to be sent to.
+/// If the player number in the message is 0, the data-section of the message is a command and will be sent to the command listener.
+/// If the player number is not 0, the data-section of the message is counted as a hit and will be sent to a hit listener.
+
 void NEC::msg_decoder::send_message( uint16_t msg ) {
     if( (msg & 0x3E) == 0 ) {                               //als speler nr een 0 is, is het een commando, anders een hit
-        cmd_l.msg_received( (msg & 0X7C0) >> 6 );			//stuurt alleen data section
+        cmd_l.msg_received( (msg & 0x7C0) >> 6 );			//stuurt alleen data section
     }
     else {
-        hit_l.msg_received( (msg & 0X7C3E) >> 1 );			//dit stuurt alleen data en speler nummer
+        //hit_l.msg_received( (msg & 0x7C3E) >> 1 );			//dit stuurt alleen data en speler nummer
+        cmd_l.msg_received( (msg & 0x7C0) >> 1 );
     }
 }
 /// \brief
@@ -50,7 +56,9 @@ void NEC::msg_decoder::main() {
                     state = states::DECODING;
                 }
                 else if( pause_dur > 2200 && pause_dur < 2800 ) {		//indiceert herhalingssignaal, dus stuur laatste decoded message
-                    send_message( decoded_msg );
+                    if( is_valid( decoded_msg )) {
+                        send_message( decoded_msg ); 
+                    }
                 }
                 break;
             case states::DECODING:
@@ -66,7 +74,9 @@ void NEC::msg_decoder::main() {
                     }
                 }
 
-                send_message( decoded_msg );
+                if( is_valid( decoded_msg )) { 
+                    send_message( decoded_msg );
+                }
                 state = states::WAITING_FOR_START_PAUSE;
                 break;
         }

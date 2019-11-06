@@ -113,8 +113,8 @@ void ir_sender::write_to_channel(int player_num, int weapon_power){
 	to the array "arr"
 */
 int * ir_sender::encode_to_array(int arr[16],uint16_t data){
-    for (int16_t i = 15; i >= 0; --i){
-        arr[i] = ((data >> i) & 1);
+    for (int16_t i = 0; i < 16; ++i){
+        arr[i] = ((data << i) & 1);
     }
     return arr;
 }

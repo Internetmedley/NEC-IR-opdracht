@@ -1,30 +1,24 @@
-PROJECT := main
+#############################################################################
+#
+# Project Makefile
+#
+# (c) Wouter van Ooijen (www.voti.nl) 2016
+#
+# This file is in the public domain.
+# 
+#############################################################################
 
-SEARCH :=
+# source files in this project (main.cpp is automatically assumed)
+SOURCES := pause_detector.cpp ir_sender.cpp msg_decoder.cpp
 
-HEADERS := keypad_listener.hpp
-HEADERS += init_game.hpp
-HEADERS += ZRX543.hpp
-HEADERS += reg_game_para.hpp
-HEADERS += run_game.hpp
-HEADERS += ir_sender.hpp
-HEADERS += pause_detector.hpp
-HEADERS += pause_listener.hpp
-HEADERS += msg_decoder.hpp
-HEADERS += msg_listener.hpp
-HEADERS += msg_logger.hpp
+# header files in this project
+HEADERS += pause_detector.hpp pause_listener.hpp init_game.hpp ir_sender.hpp keypad_listener.hpp
+HEADERS += msg_decoder.hpp msg_listener.hpp msg_logger.hpp reg_game_para.hpp run_game.hpp ZRX543.hpp
 
-SOURCES := ir_sender.cpp
-SOURCES += msg_decoder.cpp
-SOURCES += pause_detector.cpp
+# other places to look for files for this project
+SEARCH  := 
 
-TARGET := arduino_due
-
-SERIAL_PORT := COM3
-
-HEAP := BMPTK
-
-RUN_PAUSE := echo "Run complete"
-
-include $(RTOS)/makefile.inc
-include $(HWLIB)/makefile.inc
+# set REATIVE to the next higher directory 
+# and defer to the Makefile.due there
+RELATIVE := $(RELATIVE)../../
+include $(RELATIVE)Makefile.due

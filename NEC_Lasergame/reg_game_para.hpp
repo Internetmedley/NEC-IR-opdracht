@@ -77,7 +77,9 @@ namespace NEC{
                             if(player_number == 0){
                                 init_game_obj.set_flag();
                             }
-                            state = states::WAIT_GAME_TIME;
+                            else{
+                                state = states::WAIT_GAME_TIME;
+                            }
                         } else {
                             hwlib::cout << "Changing the values" << hwlib::endl;
                             state = states::WAIT_KEY_A_OR_B;
@@ -85,8 +87,8 @@ namespace NEC{
                         break;
                     case states::WAIT_GAME_TIME: {
                         CMD = logger_buffer.read();
-                        bitPrint(CMD);
-//                    firstkey = reg_game_para_buffer.read();
+                        hwlib::cout << CMD << '\n';
+                        ////key = reg_game_para_buffer.read();
                     if(firstkey == 'D' ){
                         run_game_obj.set_flag();
                         run_game_obj.write_int_to_channel(game_time);

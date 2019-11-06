@@ -51,7 +51,9 @@ void NEC::msg_decoder::main() {
 					state = states::DECODING;
 				}
 				else if( pause_dur > 2200 && pause_dur < 2800 ) {		//indiceert herhalingssignaal, dus stuur laatste decoded message
-					send_message( decoded_msg );
+					if( is_valid( decoded_msg ){ 
+						send_message( decoded_msg ); 
+					}
 				}
 				break;
 			case states::DECODING:

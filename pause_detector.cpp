@@ -1,5 +1,12 @@
 #include "pause_detector.hpp"
 
+/// @file
+
+/// \brief
+/// Reads pause lengths using IR receiver
+/// \details
+/// This overridden member function is an infinite loop that reads its IR-receiver and measures time in between IR pulses received.
+/// The measured times are written to its pause_listener's channel in order to be decoded by the msg_decoder.
 void NEC::pause_detector::main() {
     state = states::NO_MESSAGE;
     auto sig_start = hwlib::now_us();
@@ -7,7 +14,6 @@ void NEC::pause_detector::main() {
     //auto begin = hwlib::now_us();
     int pause_dur = 0;
     
-
     for( ;; ) {
         receiver.refresh();
         if( state == states::NO_MESSAGE && !receiver.read() ) {              //de IR receiver is active-low!
