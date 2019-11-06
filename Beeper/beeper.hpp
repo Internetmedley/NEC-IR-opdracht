@@ -1,6 +1,19 @@
 #ifndef BEEPER_HPP
 #define BEEPER_HPP
 
+///@file
+
+/// \brief
+///   class for speaker
+/// \details
+/// this is a class with a switch case, where the state determines the function that 'playes' the sounds.
+/// the first number written in the channel is the state.
+/// there are 7 cases that each have a function in them that determines what sound the speaker makes.
+/// await keeps track of time
+/// the functions that make sound use frequency and time to make a sound
+/// the default constructor initializes the task, channel, pin and timer. 
+/// the write_int_to_channel function writes to the channel.
+
 namespace NEC{
 class Beeper : public rtos::task<> {
 private:
@@ -165,6 +178,9 @@ public:
     };
     
 };
+
+
+//this needs to go eventually
 
 int main(){
     hwlib::wait_ms(500);

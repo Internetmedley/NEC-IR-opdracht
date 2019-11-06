@@ -1,6 +1,20 @@
 #ifndef DISPLAY_HPP
 #define DISPLAY_HPP
 
+/// @file
+
+/// \brief
+///     displaying oled class 
+/// \details
+/// this is a class with a switch case, that writes things to the display.
+/// the first number written in the channel is the state. the second depending on the case is a variabel or a new state.
+/// case 2, case 3 and case 6 set variabels: player_number, fire_power, game_time.
+/// case 10 displays the time that counts down, to give a reliabel showing of the time it wil need to be reactivated for the same amount of time.
+/// the other cases starting with 1, ending with 11 write something to the display
+/// the default constructor initializes the task, channel, oled and the window from the oled. 
+/// the write_int_to_channel function writes to the channel.
+
+
 namespace NEC{
 class Display : public rtos::task<>{
 private:
@@ -66,6 +80,10 @@ private:
                     window << "\f Time left: " << game_time;
                     oled.flush();
                     break;
+                case 11:
+                    window << "\f Waiting for startsignal. \n";
+                    oled.flush();
+                    break;
             }
         }
     }
@@ -82,6 +100,9 @@ public:
        state_decider.write( i );
    }
 };
+
+
+//this needs to go eventually;
 
 int main(){	
    hwlib::wait_ms( 500 );   // wait for the PC console to start
