@@ -1,6 +1,7 @@
-#include "hwlib.hpp"
-#include "rtos.hpp"
+#ifndef BEEPER_HPP
+#define BEEPER_HPP
 
+namespace NEC{
 class Beeper : public rtos::task<> {
 private:
     hwlib::pin_out & pin;
@@ -179,4 +180,7 @@ int main(){
     bee.write_int_to_channel(6);
     bee.write_int_to_channel(7);
     rtos::run();
+};
 }
+
+#endif
