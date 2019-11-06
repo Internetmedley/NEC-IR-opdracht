@@ -49,9 +49,7 @@ void NEC::pause_detector::main() {
                     if( hwlib::now_us() - pause_start > 6500 ) {    //message is hoe dan ook afegelopen
                         state = states::NO_MESSAGE;
                     }
-                    else if( hwlib::now_us() - pause_start > 1860 ) {    //pauze langer dan 1690 seconden indiceert startpauze van 4.5ms of einde van message
-                        //pause_timer.set( (hwlib::now_us() + 4500 - pause_start) * rtos::us );  //pauze langer dan 1690 seconden indiceert startpauze van 4.5ms of einde van message
-                        //wait( pause_timer );
+                    else if( hwlib::now_us() - pause_start > 1860 ) {    //pauze langer dan 1690 seconden indiceert startpauze van 4.5ms of einde van message 
                         hwlib::wait_us( 200 );
                     }
                 }
