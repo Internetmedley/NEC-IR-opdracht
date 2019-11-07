@@ -1,0 +1,28 @@
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /mnt/c/Users/dylan/CLionProjects/NEC_Lasergame
+
+Makefile found in: /mnt/c/Users/dylan/CLionProjects/NEC_Lasergame
+Looking for source for NEC_Lasergame
+-- File: "ir_sender.cpp"
+-- File ir_sender.cpp found as /mnt/c/Users/dylan/CLionProjects/NEC_Lasergame/ir_sender.cpp
+-- File: "msg_decoder.cpp"
+-- File msg_decoder.cpp found as /mnt/c/Users/dylan/CLionProjects/NEC_Lasergame/msg_decoder.cpp
+-- File: "pause_detector.cpp"
+-- File pause_detector.cpp found as /mnt/c/Users/dylan/CLionProjects/NEC_Lasergame/pause_detector.cpp
+-- File: "switch_to.asm"
+-- File switch_to.asm found as /mnt/c/Users/dylan/lib/RTOS/switch_to.asm
+-- File: "coroutine.cpp"
+-- File coroutine.cpp found as /mnt/c/Users/dylan/lib/RTOS/coroutine.cpp
+-- File: "rtos.cpp"
+-- File rtos.cpp found as /mnt/c/Users/dylan/lib/RTOS/rtos.cpp
+-- File: "hwlib.cpp"
+-- File hwlib.cpp found as /mnt/c/Users/dylan/lib/HWLIB/library/hwlib.cpp
+-- File: "main.cpp"
+-- File: "bmptk_cortex.c"
+-- File bmptk_cortex.c found as /mnt/c/Users/dylan/lib/BMPTK/targets/cortex/bmptk_cortex.c
+-- Target loaded: NEC_Lasergame
+------------------------------
+
+
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /mnt/c/Users/dylan/CLionProjects/NEC_Lasergame/cmake-build-debug
