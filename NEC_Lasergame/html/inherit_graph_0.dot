@@ -1,0 +1,34 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node12 [label="NEC::keypad_listener",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1keypad__listener.html"];
+  Node12 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="NEC::init_game",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1init__game.html"];
+  Node12 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="NEC::reg_game_para",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1reg__game__para.html"];
+  Node12 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="NEC::run_game",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1run__game.html"];
+  Node11 [label="NEC::msg_listener",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1msg__listener.html"];
+  Node11 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node11 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="NEC::pause_listener",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1pause__listener.html"];
+  Node10 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="NEC::msg_decoder",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1msg__decoder.html"];
+  Node0 [label="task",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node0 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="ir_sender",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classir__sender.html"];
+  Node0 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="NEC::Beeper",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1Beeper.html"];
+  Node0 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="NEC::Display",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1Display.html"];
+  Node0 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="NEC::pause_detector",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1pause__detector.html"];
+  Node0 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="NEC::ZRX543",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classNEC_1_1ZRX543.html"];
+}

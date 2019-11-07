@@ -1,0 +1,28 @@
+\hypertarget{classir__sender}{}\section{ir\+\_\+sender Class Reference}
+\label{classir__sender}\index{ir\+\_\+sender@{ir\+\_\+sender}}
+
+
+Inheritance diagram for ir\+\_\+sender\+:
+% FIG 0
+
+
+Collaboration diagram for ir\+\_\+sender\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classir__sender_a5cc4a710cdc2df0833a7994edea24ced}\label{classir__sender_a5cc4a710cdc2df0833a7994edea24ced}} 
+\hyperlink{classir__sender_a5cc4a710cdc2df0833a7994edea24ced}{ir\+\_\+sender} ()
+\begin{DoxyCompactList}\small\item\em Constructor for \hyperlink{classir__sender}{ir\+\_\+sender}\+: inits a rtos task with name sender and makes both a ir\+\_\+buffer (rtos channel) and send\+Timer(rtos\+::timer) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classir__sender_a24ecfc6576c5cefadb02ae3397d79083}\label{classir__sender_a24ecfc6576c5cefadb02ae3397d79083}} 
+void \hyperlink{classir__sender_a24ecfc6576c5cefadb02ae3397d79083}{write\+\_\+to\+\_\+channel} (int playernum, int weapon\+\_\+power)
+\begin{DoxyCompactList}\small\item\em Function that allows writing into the channel of the class \char`\"{}ir\+\_\+sender\char`\"{}  when the player number and weapon power are given. After this bitwise conversions take place to set all bytes of the message from L\+SB to M\+SB in order of\+: bit 0 start bit bits 1-\/5 player nummber (max 31) bits 6-\/10 weapon power/command (max 31) bits 11-\/15 checksum xor of bit 1\&6,2\&7,3\&8,4\&9,5\&10 after this it is written to the channel of ir sender. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classir__sender_a07097881bfab4bf15caf2f4b205cf692}\label{classir__sender_a07097881bfab4bf15caf2f4b205cf692}} 
+int $\ast$ \hyperlink{classir__sender_a07097881bfab4bf15caf2f4b205cf692}{encode\+\_\+to\+\_\+array} (int arr\mbox{[}$\,$\mbox{]}, uint16\+\_\+t data)
+\begin{DoxyCompactList}\small\item\em This function encodes uint16 to array  This function encodes all the bits in a uint16 data type to be translated to an array. This is done by shifting the uint16\+\_\+t with a i that decrements form fifhteen to zero while A\+N\+Ding with 1 thus getting its values wich is passed to the array \char`\"{}arr\char`\"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+ir\+\_\+sender.\+hpp\item 
+\hyperlink{ir__sender_8cpp}{ir\+\_\+sender.\+cpp}\end{DoxyCompactItemize}

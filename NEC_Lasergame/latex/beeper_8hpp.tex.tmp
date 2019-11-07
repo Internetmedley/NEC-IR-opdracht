@@ -1,0 +1,14 @@
+\hypertarget{beeper_8hpp}{}\section{beeper.\+hpp File Reference}
+\label{beeper_8hpp}\index{beeper.\+hpp@{beeper.\+hpp}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classNEC_1_1Beeper}{N\+E\+C\+::\+Beeper}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceNEC}{N\+EC}
+\begin{DoxyCompactList}\small\item\em class for speaker \end{DoxyCompactList}\end{DoxyCompactItemize}

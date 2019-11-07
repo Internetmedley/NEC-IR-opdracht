@@ -1,0 +1,42 @@
+\hypertarget{namespaceNEC}{}\section{N\+EC Namespace Reference}
+\label{namespaceNEC}\index{N\+EC@{N\+EC}}
+
+
+class for speaker  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classNEC_1_1Beeper}{Beeper}
+\item 
+class \hyperlink{classNEC_1_1Display}{Display}
+\item 
+class \hyperlink{classNEC_1_1init__game}{init\+\_\+game}
+\item 
+class \hyperlink{classNEC_1_1keypad__listener}{keypad\+\_\+listener}
+\item 
+class \hyperlink{classNEC_1_1msg__decoder}{msg\+\_\+decoder}
+\item 
+class \hyperlink{classNEC_1_1msg__listener}{msg\+\_\+listener}
+\item 
+class \hyperlink{classNEC_1_1pause__detector}{pause\+\_\+detector}
+\item 
+class \hyperlink{classNEC_1_1pause__listener}{pause\+\_\+listener}
+\item 
+class \hyperlink{classNEC_1_1reg__game__para}{reg\+\_\+game\+\_\+para}
+\item 
+class \hyperlink{classNEC_1_1run__game}{run\+\_\+game}
+\item 
+class \hyperlink{classNEC_1_1ZRX543}{Z\+R\+X543}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+class for speaker 
+
+displaying oled class
+
+this is a class with a switch case, where the state determines the function that \textquotesingle{}playes\textquotesingle{} the sounds. the first number written in the channel is the state. there are 7 cases that each have a function in them that determines what sound the speaker makes. await keeps track of time the functions that make sound use frequency and time to make a sound the default constructor initializes the task, channel, pin and timer. the write\+\_\+int\+\_\+to\+\_\+channel function writes to the channel.
+
+this is a class with a switch case, that writes things to the display. the first number written in the channel is the state. the second depending on the case is a variabel or a new state. case 2, case 3 and case 6 set variabels\+: player\+\_\+number, fire\+\_\+power, game\+\_\+time. case 10 displays the time that counts down, to give a reliabel showing of the time it wil need to be reactivated for the same amount of time. the other cases starting with 1, ending with 11 write something to the display the default constructor initializes the task, channel, oled and the window from the oled. the write\+\_\+int\+\_\+to\+\_\+channel function writes to the channel. 
