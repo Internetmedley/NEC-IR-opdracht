@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/NEC_LaserGame.dir/main.cpp.o  -o NEC_LaserGame 

@@ -6,17 +6,17 @@
 void msg_decoder::decode(){
 	static int MessageBuffer[32];
 	for( i=0; i < size_t(MessageBuffer); i++){
-		listner.Read() = MessageBuffer.at(i);
+		pauseBuffer.Read() = MessageBuffer.at(i);
 	}
 	
 	for(int pauseIndex = 0; pauseIndex < size_t(MessageBuffer); i++){
 		int pause = MessageBuffer.at(pauseIndex);
 		switch(pause){
 			case (pause > 1900 && pause < 2000);
-				listner.write(1);
+				listener.write(1);
 				break;
 			case (pause >500 && pause < 600);
-				listner.write(0);
+				listener.write(0);
 				break;
 			default:
 				break;
